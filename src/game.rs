@@ -1,9 +1,10 @@
 use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
     prelude::*,
+    window::WindowResolution,
 };
 
-use crate::{player::PlayerPlugin, terminal::TerminalPlugin};
+use crate::{object::ObjectsPlugin, terminal::TerminalPlugin, physics::PhysicsPlugin};
 
 pub struct Game;
 
@@ -20,18 +21,24 @@ pub enum GameState {
 
 impl Plugin for Game {
     fn build(&self, app: &mut App) {
-        app.add_plugins(DefaultPlugins.set(WindowPlugin {
-            primary_window: Some(Window {
-                title: "You're the Monster".to_string(),
-                ..default()
-            }),
-            ..default()
-        }))
+        app.add_plugins(
+            DefaultPlugins
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: "You're the Monster".to_string(),
+                        resolution: WindowResolution::new(960., 540.),
+                        ..default()
+                    }),
+                    ..default()
+                })
+                .set(ImagePlugin::default_nearest()),
+        )
         .add_state::<GameState>()
-        .add_plugin(LogDiagnosticsPlugin::default())
-        .add_plugin(FrameTimeDiagnosticsPlugin::default())
+        // .add_plugin(LogDiagnosticsPlugin::default())
+        // .add_plugin(FrameTimeDiagnosticsPlugin::default())
         .add_plugin(TerminalPlugin)
-        .add_plugin(PlayerPlugin)
+        .add_plugin(PhysicsPlugin)
+        .add_plugin(ObjectsPlugin)
         .add_startup_system(setup)
         .add_system(pause.in_set(OnUpdate(GameState::Terminal)))
         .add_system(pause.in_set(OnUpdate(GameState::Movement)))

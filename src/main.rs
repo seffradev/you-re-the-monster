@@ -2,7 +2,8 @@ use bevy::prelude::*;
 use game::Game;
 
 mod game;
-mod player;
+mod object;
+mod physics;
 mod terminal;
 
 fn main() {
