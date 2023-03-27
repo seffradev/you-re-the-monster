@@ -1,10 +1,5 @@
 use bevy::prelude::*;
-use game::Game;
-
-mod game;
-mod object;
-mod physics;
-mod terminal;
+use you_re_the_monster::game::Game;
 
 fn main() {
     App::new().add_plugin(Game).run();

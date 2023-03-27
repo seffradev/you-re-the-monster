@@ -2,6 +2,10 @@
 Theme: You're the monster
 Special object: Card
 
+## Controls
+- Vim-bindings
+    - K: up, J: down, L: right, H: left
+
 ## Mechanics
 - Access cards to access terminals
     - different levels of permissions
@@ -14,10 +18,13 @@ You decide to run it in production. Said release requires huge database migratio
 
 ## Ideas
 - Terminal system for access cards/"hacking"
+    - 80x24 characters
+        - When you reach the end, wrap everything around to the first line
     - Every terminal has their own history and screen
     - Purpose is to clear and log out after everything, otherwise you might be found out
 - Access/code cards
     - Get from dialogue or loot
+    - Have to put them back to avoid suspicion
 
 ## Copyright
 - Fira Code - https://github.com/tonsky/FiraCode

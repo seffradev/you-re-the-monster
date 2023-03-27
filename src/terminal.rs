@@ -22,10 +22,10 @@ impl Plugin for TerminalPlugin {
         app.add_state::<AccessLevel>()
             .add_startup_system(startup)
             .add_systems((
-                hide.in_schedule(OnExit(GameState::Terminal)),
-                show.in_schedule(OnEnter(GameState::Terminal)),
-                input.in_set(OnUpdate(GameState::Terminal)),
-                text_update_system.in_set(OnUpdate(GameState::Terminal)),
+                hide.in_schedule(OnExit(GameState::Shell)),
+                show.in_schedule(OnEnter(GameState::Shell)),
+                input.in_set(OnUpdate(GameState::Shell)),
+                text_update_system.in_set(OnUpdate(GameState::Shell)),
                 // elevate_privileges.in_schedule(OnEnter(AccessLevel::Admin)),
                 // deelevate_privileges.in_schedule(OnEnter(AccessLevel::User)),
             ));
@@ -429,11 +429,11 @@ fn input(
         match access_level {
             AccessLevel::User => match line {
                 Line::Login => update_state.set(AccessLevel::Admin),
-                _ => ()
+                _ => (),
             },
             AccessLevel::Admin => match line {
                 Line::Logout => update_state.set(AccessLevel::User),
-                _ => ()
+                _ => (),
             },
         }
 
